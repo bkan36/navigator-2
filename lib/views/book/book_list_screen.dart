@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_2/data/book_list.dart';
-import 'package:navigator_2/routes/my_paths.dart';
+import 'package:navigator_2/routes/my_routes_app.dart';
 import 'package:navigator_2/routes/my_route_path.dart';
 import 'package:navigator_2/routes/my_router_delegate.dart';
 import '../../entities/book_entity.dart';
@@ -20,9 +20,8 @@ class BooksListScreen extends StatelessWidget {
             ListTile(
               title: Text(book!.title),
               subtitle: Text(book.author),
-              onTap: () => MyRouterDelegate().onTapped(
-                MyRoutePath(path: {bookDetailsPath: bookDetailsPath}, params: [book.id]),
-              ),
+              onTap: () => MyRouterDelegate()(
+                  MyRoutePath(bookDetailsPath, params: [book.id])),
             )
         ],
       ),
