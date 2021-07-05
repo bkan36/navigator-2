@@ -3,21 +3,6 @@ import 'package:flutter/material.dart';
 import 'my_routes_app.dart';
 import 'my_route_path.dart';
 
-// MyRoutePath checkParams(String route, String pathFromUrl) {
-//   if (route.endsWith(PARAM_CHAR) == false)
-//     return MyRoutePath(route, dynamicPath: pathFromUrl);
-
-//   final routeList = Uri.parse(route).pathSegments;
-//   final pathList = Uri.parse(pathFromUrl).pathSegments;
-
-//   List<String> params = [];
-
-//   for (var i = 0; i < routeList.length; i++)
-//     if (routeList[i] == PARAM_CHAR) params.add(pathList[i]);
-
-//   return MyRoutePath(route, dynamicPath: pathFromUrl, params: params);
-// }
-
 MyRoutePath myRoutesParser(String pathFromUrl) {
   final List<String> pathUriList = Uri.parse(pathFromUrl).pathSegments;
 
@@ -63,17 +48,12 @@ String buildRouteLocation(MyRoutePath route) {
 
 class MyRouteInformationParser extends RouteInformationParser<MyRoutePath> {
   @override
-  Future<MyRoutePath> parseRouteInformation(RouteInformation routeInf) async {
-    print('PARSE ROUTE INFORMATION');
-    return myRoutesParser(routeInf.location ?? '');
-  }
+  Future<MyRoutePath> parseRouteInformation(RouteInformation routeInf) async =>
+      myRoutesParser(routeInf.location ?? '');
 
   @override
-  RouteInformation? restoreRouteInformation(MyRoutePath routePath) {
-    print('RESTORE ROUTE INFORMATION');
-
-    return RouteInformation(location: buildRouteLocation(routePath));
-  }
+  RouteInformation? restoreRouteInformation(MyRoutePath routePath) =>
+      RouteInformation(location: buildRouteLocation(routePath));
 }
 
 // Future<MyRoutePath> myRouteParserAsync(String? path) async {

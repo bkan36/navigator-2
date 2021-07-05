@@ -1,6 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:navigator_2/routes/my_routes_app.dart';
+import 'dart:async';
+import 'my_routes_app.dart';
 import 'my_route_path.dart';
 
 class MyRouterDelegate extends RouterDelegate<MyRoutePath>
@@ -21,10 +21,7 @@ class MyRouterDelegate extends RouterDelegate<MyRoutePath>
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 
   @override
-  MyRoutePath? get currentConfiguration {
-    print('GET CURRENT CONFIGURATION');
-    return appRoutePath.last;
-  }
+  MyRoutePath? get currentConfiguration => appRoutePath.last;
 
   void call(MyRoutePath appRoute) {
     appRoutePath.add(appRoute);
@@ -34,59 +31,48 @@ class MyRouterDelegate extends RouterDelegate<MyRoutePath>
   }
 
   @override
-  Widget build(BuildContext context) {
-    print('BUILD WIDGET (NAVIGATOR)');
-    return Navigator(
-      key: navigatorKey,
-      pages: _pages.isEmpty
-          ? [
-              MaterialPage(
-                child: Center(
-                  child: Text(
-                    'Loading...',
-                    style: TextStyle(
-                      fontSize: 100,
-                      color: Colors.white,
+  Widget build(BuildContext context) => Navigator(
+        key: navigatorKey,
+        pages: _pages.isEmpty
+            ? [
+                MaterialPage(
+                  child: Center(
+                    child: Text(
+                      'Loading...',
+                      style: TextStyle(
+                        fontSize: 100,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-              )
-            ]
-          : _pages,
-      onPopPage: (route, result) {
-        print('ON POP PAGE');
-        if (!route.didPop(result)) return false;
+                )
+              ]
+            : _pages,
+        onPopPage: (route, result) {
+          if (!route.didPop(result)) return false;
 
-        appRoutePath.removeLast();
+          appRoutePath.removeLast();
 
-        if (appRoutePath.length == 0) appRoutePath.add(MyRoutePath(homePath));
+          if (appRoutePath.length == 0) appRoutePath.add(MyRoutePath(homePath));
 
-        _buildPages(appRoutePath.last);
+          _buildPages(appRoutePath.last);
 
-        notifyListeners();
-        return true;
-      },
-    );
-  }
+          notifyListeners();
+          return true;
+        },
+      );
 
   @override
   Future<void> setNewRoutePath(MyRoutePath route) async {
-    print('SET NEW ROUTE PATH');
     appRoutePath.add(route);
     return await _buildPages(route);
   }
 
-  Future<void> _buildPages(MyRoutePath appRoute) async {
-    print('BUILD PAGES');
-    print(appRoute);
-
-    _pages = pathPagesMap[appRoute.path]!;
-
-  }
+  Future<void> _buildPages(MyRoutePath appRoute) async =>
+      _pages = pathPagesMap[appRoute.path]!;
 
   void _buildPagesTree() {
     final routeSorted = myRoutesMap.keys.toList();
-    routeSorted.sort((a, b) => b.length.compareTo(a.length));
 
     for (var route in routeSorted) {
       List<MaterialPage> pagesList = [];
@@ -112,6 +98,7 @@ class MyRouterDelegate extends RouterDelegate<MyRoutePath>
             break;
           }
       }
+
       pathPagesMap[tmp] = pagesList;
     }
   }

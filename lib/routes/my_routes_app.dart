@@ -22,9 +22,10 @@ final Map<String, Widget> myRoutesMap = {
   homePath: BooksListScreen(),
   userRepoSettingsBranches: Center(child: Text('/*/*/settings/branches')),
   bookDetailsPath: BookDetailsScreen(),
-  bookSettingsPath: Center(child:Text('/book')),
+  bookSettingsPath: Center(child:Text(bookSettingsPath)),
   user: Center(child:Text(user)),
   userRepo: Center(child:Text(userRepo)),
   userRepoSettings: Center(child:Text(userRepoSettings)),
+  b: Center(child:Text(b)),
   pageNotFoundPath: UnknownScreen()
 };
