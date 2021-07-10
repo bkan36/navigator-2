@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_2/routes/my_route_information_parser.dart';
 import 'dart:async';
 import 'my_routes_app.dart';
 import 'my_route_path.dart';
 
-class MyRouterDelegate extends RouterDelegate<MyRoutePath>
-    with ChangeNotifier, PopNavigatorRouterDelegateMixin<MyRoutePath> {
+class MyRouterDelegate extends RouterDelegate<MyRouteData>
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin<MyRouteData> {
   factory MyRouterDelegate() => _singlton;
   static final MyRouterDelegate _singlton = MyRouterDelegate._();
   MyRouterDelegate._() : _navigatorKey = GlobalKey<NavigatorState>() {
-    _buildPagesTree();
+    _buildTrees();
   }
 
   final GlobalKey<NavigatorState> _navigatorKey;
-  late List<MyRoutePath> appRoutePath = [];
+  late MyRouteData routeData;
 
   List<MaterialPage> _pages = [];
-  Map<String, List<MaterialPage>> pathPagesMap = {};
+  Map<String, List<MaterialPage>> routesPagesMap = {};
+  Map<String, String> routePrevMap = {};
 
   @override
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 
   @override
-  MyRoutePath? get currentConfiguration => appRoutePath.last;
+  MyRouteData? get currentConfiguration => routeData;
 
-  void call(MyRoutePath appRoute) {
-    appRoutePath.add(appRoute);
-    _buildPages(appRoutePath.last);
+  void call(MyRouteData appRoute) {
+    routeData = appRoute;
+    _buildPages(routeData);
 
     notifyListeners();
   }
@@ -49,13 +51,10 @@ class MyRouterDelegate extends RouterDelegate<MyRoutePath>
               ]
             : _pages,
         onPopPage: (route, result) {
+          print('POPOPOP');
           if (!route.didPop(result)) return false;
 
-          appRoutePath.removeLast();
-
-          if (appRoutePath.length == 0) appRoutePath.add(MyRoutePath(homePath));
-
-          _buildPages(appRoutePath.last);
+          _onpop();
 
           notifyListeners();
           return true;
@@ -63,19 +62,40 @@ class MyRouterDelegate extends RouterDelegate<MyRoutePath>
       );
 
   @override
-  Future<void> setNewRoutePath(MyRoutePath route) async {
-    appRoutePath.add(route);
+  Future<void> setNewRoutePath(MyRouteData route) async {
+    routeData = route;
     return await _buildPages(route);
   }
 
-  Future<void> _buildPages(MyRoutePath appRoute) async =>
-      _pages = pathPagesMap[appRoute.path]!;
+  void _onpop() {
+    var newPath = routePrevMap[routeData.path];
 
-  void _buildPagesTree() {
-    final routeSorted = myRoutesMap.keys.toList();
+    List<String> pathList = Uri.parse(newPath!).pathSegments;
 
-    for (var route in routeSorted) {
+    var i = 0;
+    var pathString = '';
+
+    for (var a = 0; a < pathList.length; a++)
+      if (pathList[a][0] == PARAM_CHAR) {
+        pathString += '/${routeData.params[i]!}';
+        i++;
+      } else
+        pathString += '/${pathList[a]}';
+
+    routeData = myRoutesParser(pathString);
+    _buildPages(routeData);
+  }
+
+  Future<void> _buildPages(MyRouteData appRoute) async =>
+      _pages = routesPagesMap[appRoute.path]!;
+
+  void _buildTrees() {
+    final myRoutes = myRoutesMap.keys.toList();
+
+    for (var route in myRoutes) {
       List<MaterialPage> pagesList = [];
+      List<String> routeList = [];
+
       var uri = Uri.parse(route).pathSegments;
       var tmp = '';
 
@@ -84,22 +104,28 @@ class MyRouterDelegate extends RouterDelegate<MyRoutePath>
         child: myRoutesMap[homePath]!,
       ));
 
-      if (uri.isEmpty) tmp = '/';
+      routeList.add(homePath);
+
+      if (uri.isEmpty) tmp = homePath;
 
       for (var p in uri) {
         tmp += '/$p';
 
-        for (var i = 0; i < routeSorted.length; i++)
-          if (routeSorted[i] == tmp) {
+        for (var i = 0; i < myRoutes.length; i++)
+          if (myRoutes[i] == tmp) {
             pagesList.add(MaterialPage(
-              key: ValueKey(routeSorted[i] + i.toString()),
+              key: ValueKey(myRoutes[i] + i.toString()),
               child: myRoutesMap[tmp]!,
             ));
+            routeList.add(tmp);
             break;
           }
       }
 
-      pathPagesMap[tmp] = pagesList;
+      if (tmp != homePath) routeList.removeLast();
+      
+      routePrevMap[tmp] = routeList.last;
+      routesPagesMap[tmp] = pagesList;
     }
   }
 }

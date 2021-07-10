@@ -15,15 +15,15 @@ void main() {
   group('parser route test', () {
     test('should return the home path', () => runTest(homePath));
 
-    test('shoudl return 404 path',
+    test('should return 404 path',
         () => runTest('/fakepath', toMatch: pageNotFoundPath));
 
     test('should return a static nested path', () => runTest(bookSettingsPath));
 
-    test('shoudl return a dynamic static path with 1 param',
+    test('should return a dynamic static path with 1 param',
         () => runTest('/book/20', toMatch: bookDetailsPath));
 
-    test('shoudl return a dynamic nested path',
+    test('should return a dynamic nested path',
         () => runTest('/dynamic/path/settings/branches', toMatch: userRepoSettingsBranches));
   });
 }

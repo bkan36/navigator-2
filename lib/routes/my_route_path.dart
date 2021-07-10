@@ -1,13 +1,9 @@
-class MyRoutePath {
+class MyRouteData {
   final String path;
   final List<String?> params;
-  String dynamicPath;
 
-  MyRoutePath(this.path, {List<String>? params, String? dynamicPath})
-      : this.params = params ?? [],
-        this.dynamicPath = dynamicPath ?? '';
+  MyRouteData(this.path, {List<String>? params}): this.params = params ?? [];
 
   @override
-  String toString() =>
-      'path: $path | params: $params | pathToDisplay: $dynamicPath';
+  String toString() => 'path: $path | params: $params';
 }

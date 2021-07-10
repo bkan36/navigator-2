@@ -5,7 +5,6 @@ import 'package:navigator_2/routes/my_router_delegate.dart';
 import '../../entities/book_entity.dart';
 
 class BookDetailsScreen extends StatelessWidget {
-
   BookDetailsScreen();
 
   @override
@@ -24,8 +23,8 @@ class BookDetailsScreen extends StatelessWidget {
               Text(book.title, style: Theme.of(context).textTheme.headline6),
               Text(book.id, style: Theme.of(context).textTheme.subtitle1),
               Text(book.author, style: Theme.of(context).textTheme.subtitle1),
-            ], 
-            if (book == null)  Text('BOOK NOT FOUND'),
+            ],
+            if (book == null) Text('BOOK NOT FOUND'),
           ],
         ),
       ),
