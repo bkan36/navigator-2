@@ -79,7 +79,7 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
 
     for (var a = 0; a < pathList.length; a++)
       if (pathList[a][0] == PARAM_CHAR) {
-        pathString += '/${routeData.params[a]!}';
+        pathString += '/${routeData.params[i]!}';
         i++;
       } else
         pathString += '/${pathList[a]}';

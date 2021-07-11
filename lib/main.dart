@@ -10,11 +10,19 @@ void main() {
 }
 
 class BooksApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Books App',
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData(
+          primaryColor: Colors.green,
+          scaffoldBackgroundColor: Colors.blueGrey[900],
+          textTheme: TextTheme(
+            headline6: TextStyle(color: Colors.white),
+            subtitle1: TextStyle(color: Colors.white),
+            caption: TextStyle(color: Colors.white),
+          )),
       routerDelegate: MyRouterDelegate(),
       routeInformationParser: MyRouteInformationParser(),
     );

@@ -6,7 +6,7 @@ import 'package:navigator_2/views/unknown.dart';
 const PARAM_CHAR = ':';
 
 const homePath = bookListPath;
-const bookListPath = '/book';
+const bookListPath = '/';
 const bookDetailsPath = '/book/:id';
 const bookSettingsPath = '/book/:id/settings';
 const user = '/:user';
