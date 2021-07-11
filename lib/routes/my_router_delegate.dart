@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navigator_2/routes/my_route_information_parser.dart';
+import 'my_route_information_parser.dart';
 import 'dart:async';
 import 'my_routes_app.dart';
 import 'my_route_data.dart';

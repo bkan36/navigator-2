@@ -3,8 +3,6 @@ import 'package:navigator_2/views/book/book_details_screen.dart';
 import 'package:navigator_2/views/book/book_list_screen.dart';
 import 'package:navigator_2/views/unknown.dart';
 
-// target /:bk/account/:jhfd/settings
-
 const PARAM_CHAR = ':';
 
 const homePath = bookListPath;

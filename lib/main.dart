@@ -9,21 +9,14 @@ void main() {
   runApp(BooksApp());
 }
 
-class BooksApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _BooksAppState();
-}
-
-class _BooksAppState extends State<BooksApp> {
-  final _routerDelegate = MyRouterDelegate();
-  final _routeInformationParser = MyRouteInformationParser();
+class BooksApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Books App',
-      routerDelegate: _routerDelegate,
-      routeInformationParser: _routeInformationParser,
+      routerDelegate: MyRouterDelegate(),
+      routeInformationParser: MyRouteInformationParser(),
     );
   }
 }

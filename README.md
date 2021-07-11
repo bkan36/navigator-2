@@ -1,16 +1,35 @@
 # navigator_2
 
-A new Flutter project.
+A way to implement navigator without using a external package.
 
-## Getting Started
+how to use ?
 
-This project is a starting point for a Flutter application.
+1 - Pass MyRouterDelegate() and MyRouteInformationParser() to your MaterialApp.router in main.dart:
 
-A few resources to get you started if this is your first Flutter project:
+    return MaterialApp.router(
+      title: 'Books App',
+      routerDelegate: MyRouterDelegate(),
+      routeInformationParser: MyRouteInformationParser(),
+    );
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+2 - Fill your routes in my_route_app.dart and be care to keep homePath, pageNotFoundPath and the
+    PARAM_CHAR const, they are used in information_parser and router_delegate.
+    each widget associated to a path don't have to take arguments in its constructor you'll retrieve them in a different way.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3 - To reach a route you just have to use this syntax:
+
+    MyRouterDelegate()(MyRouteData(homePath, params: [book.id]))
+
+    this will call the call method in my_router_delegate.dart, params is optional.
+
+4 - To retrieve your data:
+    var approute = MyRouterDelegate().currentConfiguration;
+    Book? book = getBookById(approute!.params.first!);
+
+    currentConfigaturation return MyRouteData that hold the current path and its params.
+
+that's all.
+
+to remove the # from url:
+    - add this dependency in your pubspec.yaml file: url_strategy: ^0.2.0
+    - before runApp(MyApp()) inside the main put setPathUrlStrategy(); and don't forget to import it
