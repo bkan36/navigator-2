@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:navigator_2/routes/my_route_information_parser.dart';
 import 'dart:async';
 import 'my_routes_app.dart';
-import 'my_route_path.dart';
+import 'my_route_data.dart';
 
 class MyRouterDelegate extends RouterDelegate<MyRouteData>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<MyRouteData> {
@@ -51,7 +51,6 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
               ]
             : _pages,
         onPopPage: (route, result) {
-          print('POPOPOP');
           if (!route.didPop(result)) return false;
 
           _onpop();
@@ -66,6 +65,9 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
     routeData = route;
     return await _buildPages(route);
   }
+
+  Future<void> _buildPages(MyRouteData appRoute) async =>
+      _pages = routesPagesMap[appRoute.path]!;
 
   void _onpop() {
     var newPath = routePrevMap[routeData.path];
@@ -86,9 +88,6 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
     _buildPages(routeData);
   }
 
-  Future<void> _buildPages(MyRouteData appRoute) async =>
-      _pages = routesPagesMap[appRoute.path]!;
-
   void _buildTrees() {
     final myRoutes = myRoutesMap.keys.toList();
 
@@ -106,24 +105,25 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
 
       routeList.add(homePath);
 
-      if (uri.isEmpty) tmp = homePath;
+      if (route == homePath)
+        tmp = homePath;
+      else
+        for (var ps in uri) {
+          tmp += '/$ps';
 
-      for (var p in uri) {
-        tmp += '/$p';
-
-        for (var i = 0; i < myRoutes.length; i++)
-          if (myRoutes[i] == tmp) {
-            pagesList.add(MaterialPage(
-              key: ValueKey(myRoutes[i] + i.toString()),
-              child: myRoutesMap[tmp]!,
-            ));
-            routeList.add(tmp);
-            break;
-          }
-      }
+          for (var i = 0; i < myRoutes.length; i++)
+            if (myRoutes[i] == tmp) {
+              pagesList.add(MaterialPage(
+                key: ValueKey(myRoutes[i] + i.toString()),
+                child: myRoutesMap[tmp]!,
+              ));
+              routeList.add(tmp);
+              break;
+            }
+        }
 
       if (tmp != homePath) routeList.removeLast();
-      
+
       routePrevMap[tmp] = routeList.last;
       routesPagesMap[tmp] = pagesList;
     }

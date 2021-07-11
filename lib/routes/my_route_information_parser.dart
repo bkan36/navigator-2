@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'my_routes_app.dart';
-import 'my_route_path.dart';
+import 'my_route_data.dart';
 
 MyRouteData myRoutesParser(String pathFromUrl) {
   final List<String> pathUriList = Uri.parse(pathFromUrl).pathSegments;
@@ -55,52 +55,3 @@ class MyRouteInformationParser extends RouteInformationParser<MyRouteData> {
   RouteInformation? restoreRouteInformation(MyRouteData routePath) =>
       RouteInformation(location: buildRouteLocation(routePath));
 }
-
-// Future<MyRoutePath> myRouteParserAsync(String? path) async {
-//   final List<String> urlFetchedList = Uri.parse(path ?? '').pathSegments;
-
-//   if (urlFetchedList.length == 0 || path == '/')
-//     return MyRoutePath(homePath);
-
-//   final routes = myRoutesMap.keys.toList();
-//   Map<int, String> pathMap = {};
-//   var similarity = 0;
-//   var tmp;
-
-//   for (var pathsApp in routes) {
-//     List<String> pathSplited = Uri.parse(pathsApp).pathSegments;
-
-//     if (pathSplited.isNotEmpty && pathSplited.first == urlFetchedList.first) {
-//       var pathTmp = '';
-//       var i = 0;
-
-//       while (
-//           i < pathsApp.length && i < path!.length && pathsApp[i] == path[i]) {
-//         pathTmp += pathsApp[i];
-//         i++;
-//       }
-
-//       if (tmp == pathTmp) similarity++;
-
-//       pathMap[pathsApp.length] = pathTmp;
-//       tmp = pathTmp;
-//     }
-//   }
-
-//   if (pathMap.keys.length > 0 || similarity > 1) {
-//     var finalPath = pathMap.values.first;
-
-//     if (finalPath == path) return MyRoutePath(path!);
-
-//     var a = 0;
-
-//     for (var p in pathMap.keys) if (p > a) a = p;
-
-//     final paramRouteList = Uri.parse(path!.substring(a)).pathSegments;
-//     finalPath = path.substring(0, a);
-
-//     return MyRoutePath(finalPath, params: paramRouteList);
-//   }
-
-//   return MyRoutePath(pageNotFoundPath);
-// }

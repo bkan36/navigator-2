@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:navigator_2/data/book_list.dart';
 import 'package:navigator_2/routes/my_routes_app.dart';
-import 'package:navigator_2/routes/my_route_path.dart';
+import 'package:navigator_2/routes/my_route_data.dart';
 import 'package:navigator_2/routes/my_router_delegate.dart';
 
 import '../../entities/book_entity.dart';
