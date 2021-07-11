@@ -1,6 +1,6 @@
 # navigator_2
 
-A way to implement navigator without using a external package.
+A way to implement navigator 2.0 without using a external package.
 
 how to use ?
 

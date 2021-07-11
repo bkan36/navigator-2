@@ -18,7 +18,7 @@ const pageNotFoundPath = '/404';
 
 final Map<String, Widget> myRoutesMap = {
   homePath: BooksListScreen(),
-  userRepoSettingsBranches: Center(child: Text('/*/*/settings/branches')),
+  userRepoSettingsBranches: Center(child: Text(userRepoSettingsBranches)),
   bookDetailsPath: BookDetailsScreen(),
   bookSettingsPath: Center(child:Text(bookSettingsPath)),
   user: Center(child:Text(user)),
