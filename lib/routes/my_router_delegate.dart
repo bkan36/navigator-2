@@ -77,12 +77,11 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
     var i = 0;
     var pathString = '';
 
-    for (var a = 0; a < pathList.length; a++)
-      if (pathList[a][0] == PARAM_CHAR) {
-        pathString += '/${routeData.params[i]!}';
-        i++;
-      } else
-        pathString += '/${pathList[a]}';
+    for (var ps in pathList)
+      if (ps[0] == PARAM_CHAR)
+        pathString += '/${routeData.params[ps.replaceFirst(PARAM_CHAR, '')]!}';
+      else
+        pathString += '/$ps';
 
     routeData = myRoutesParser(pathString);
     _buildPages(routeData);

@@ -16,11 +16,11 @@ void main() {
     test('should return the home path', () => runTest(homePath));
 
     test('should return 404 path',
-        () => runTest('/fakepath', toMatch: pageNotFoundPath));
+        () => runTest('/book/to/fail/e', toMatch: pageNotFoundPath));
 
     test('should return a static nested path', () => runTest(bookSettingsPath));
 
-    test('should return a dynamic static path with 1 param',
+    test('should return a path with 1 param',
         () => runTest('/book/20', toMatch: bookDetailsPath));
 
     test('should return a dynamic nested path',
