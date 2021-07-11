@@ -25,6 +25,11 @@ class BookDetailsScreen extends StatelessWidget {
               Text(book.author, style: Theme.of(context).textTheme.subtitle1),
             ],
             if (book == null) Text('BOOK NOT FOUND'),
+            SizedBox(height: 80.0),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('BACK'),
+            )
           ],
         ),
       ),

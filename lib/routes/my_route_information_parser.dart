@@ -32,15 +32,13 @@ MyRouteData myRoutesParser(String pathFromUrl) {
 String buildRouteLocation(MyRouteData route) {
   if (!route.path.contains(PARAM_CHAR)) return route.path;
 
-  var i = 0;
   var location = '';
   final pathList = Uri.parse(route.path).pathSegments;
 
   for (var ps in pathList)
-    if (ps[0] == PARAM_CHAR) {
-      location += '/${route.params[i]!}';
-      i++;
-    } else
+    if (ps[0] == PARAM_CHAR)
+      location += '/${route.params[ps.replaceFirst(PARAM_CHAR, '')]!}';
+    else
       location += '/$ps';
 
   return location;
