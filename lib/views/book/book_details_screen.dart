@@ -10,7 +10,7 @@ class BookDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var approute = MyRouterDelegate().currentConfiguration;
-    Book? book = getBookById(approute!.params.first!);
+    Book? book = getBookById(approute!.params['id']!);
 
     return Scaffold(
       appBar: AppBar(),

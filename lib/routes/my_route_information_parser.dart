@@ -13,16 +13,16 @@ MyRouteData myRoutesParser(String pathFromUrl) {
 
     if (routeUriList.length == pathUriList.length) {
       var diff = 0;
-      List<String> params = [];
+      Map<String, String> params = {};
 
       for (var i = 0; i < routeUriList.length; i++)
         if (routeUriList[i][0] != PARAM_CHAR &&
             routeUriList[i] != pathUriList[i])
           diff++;
-        else if (routeUriList[i][0] == PARAM_CHAR) params.add(pathUriList[i]);
+        else if (routeUriList[i][0] == PARAM_CHAR)
+          params[routeUriList[i].replaceFirst(PARAM_CHAR, '')] = pathUriList[i];
 
-      if (diff == 0)
-        return MyRouteData(route, params: params);
+      if (diff == 0) return MyRouteData(route, params: params);
     }
   }
 
@@ -35,7 +35,7 @@ String buildRouteLocation(MyRouteData route) {
   var i = 0;
   var location = '';
   final pathList = Uri.parse(route.path).pathSegments;
-  
+
   for (var ps in pathList)
     if (ps[0] == PARAM_CHAR) {
       location += '/${route.params[i]!}';
