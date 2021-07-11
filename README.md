@@ -30,6 +30,22 @@ how to use ?
 
 that's all.
 
+note:
+    If you prefer to use a Map for handle params you can do it by switching to paramsMap branch of this project.
+
+    Only step 3 and 4 will change
+    
+    replace
+        MyRouterDelegate()(MyRouteData(homePath, params: [book.id]))
+    by
+        MyRouterDelegate()(MyRouteData(homePath, params: {'id': book.id}))
+
+    and
+        Book? book = getBookById(approute!.params.first!);
+    by
+        Book? book = getBookById(approute!.params[id]!);
+
+
 to remove the # from url:
     - add this dependency in your pubspec.yaml file: url_strategy: ^0.2.0
     - before runApp(MyApp()) inside the main put setPathUrlStrategy(); and don't forget to import it
