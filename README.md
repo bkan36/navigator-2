@@ -44,7 +44,7 @@ Use List instead of Map for params:
     
     2 - now instead of: MyRouterDelegate()(MyRouteData(homePath, params: {'id': book.id}))
         you have: MyRouterDelegate()(MyRouteData(homePath, params: [book.id]))
-        when you changing route
+        for changing route
 
         and Book? book = getBookById(approute!.params['id']!);
         is replaced by Book? book = getBookById(approute!.params.first!);
