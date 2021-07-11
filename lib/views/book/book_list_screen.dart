@@ -23,7 +23,7 @@ class BooksListScreen extends StatelessWidget {
               title: Text(book!.title),
               subtitle: Text(book.author),
               onTap: () => MyRouterDelegate()(
-                  MyRouteData(bookDetailsPath, params: [book.id])),
+                  MyRouteData(bookDetailsPath, params: {':id': book.id})),
             )
         ],
       ),
