@@ -42,19 +42,6 @@ to remove the # from url:
     - before runApp(MyApp()) inside the main put setPathUrlStrategy(); and don't forget to import it
 
 
-Use List instead of Map for params:
-    If you want to use a List to handle params you can do it by switching to paramList branch of this project.
-
-    1 - copy routes folder then:
-    
-    2 - now instead of: MyRouterDelegate()(MyRouteData(homePath, params: {'id': book.id}))
-        you have: MyRouterDelegate()(MyRouteData(homePath, params: [book.id]))
-        for changing route
-
-        then: Book? book = getBookById(approute!.params['id']!);
-        is replaced by: Book? book = getBookById(approute!.params.first!);
-        to fetch you params.
-
 !!! WARNING !!!
 
     If your app have 2 routes like bookDetailsPath and userRepo (my_routes_app.dart)
