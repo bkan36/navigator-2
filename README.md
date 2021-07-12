@@ -18,7 +18,8 @@ how to use ?
 
 3 - Fill your routes in my_route_app.dart and be care to keep homePath, pageNotFoundPath and the
     PARAM_CHAR const, they are used in information_parser and router_delegate.
-    each widget associated to a path don't have to take arguments in its constructor you'll retrieve them in a different way.
+    Each widget associated to a path don't have to take arguments in its constructor
+    you'll retrieve them in a different way.
 
 4 - To reach a route you just have to use this syntax:
 
@@ -26,16 +27,17 @@ how to use ?
 
     this will call the call method in my_router_delegate.dart, params is optional.
 
-5 - To retrieve your data:
+5 - To retrieve your params:
     var approute = MyRouterDelegate().currentConfiguration;
     Book? book = getBookById(approute!.params['id']!);
 
     currentConfigaturation return MyRouteData that hold the current path and its params.
+    'id' must be the same name defined in myRouteMap (my_routes_app.dart).
 
 that's all.
 
 to remove the # from url:
-    - add this dependency in your pubspec.yaml file: url_strategy: ^0.2.0
+    - add this dependency in your pubspec.yaml file -> url_strategy: ^0.2.0
     - before runApp(MyApp()) inside the main put setPathUrlStrategy(); and don't forget to import it
 
 
@@ -48,11 +50,12 @@ Use List instead of Map for params:
         you have: MyRouterDelegate()(MyRouteData(homePath, params: [book.id]))
         for changing route
 
-        and: Book? book = getBookById(approute!.params['id']!);
+        then: Book? book = getBookById(approute!.params['id']!);
         is replaced by: Book? book = getBookById(approute!.params.first!);
         to fetch you params.
 
 !!! WARNING !!!
 
-    If your app have 2 routes like bookDetailsPath and userRepo (my_routes_app.dart) be care of "book" keyword because if someone has book as name it will result in unintended behavior
-    
+    If your app have 2 routes like bookDetailsPath and userRepo (my_routes_app.dart)
+    be care of "book" keyword because if someone has book as name it will result in unintended behavior
+    he will be redirect to /book/:id instead of /:user/:repo.
