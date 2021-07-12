@@ -9,7 +9,7 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
   factory MyRouterDelegate() => _singlton;
   static final MyRouterDelegate _singlton = MyRouterDelegate._();
   MyRouterDelegate._() : _navigatorKey = GlobalKey<NavigatorState>() {
-    _buildTrees();
+    _buildListPages();
   }
 
   final GlobalKey<NavigatorState> _navigatorKey;
@@ -27,7 +27,7 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
 
   void call(MyRouteData appRoute) {
     routeData = appRoute;
-    _buildPages(routeData);
+    _pages = routesPagesMap[appRoute.path]!;
 
     notifyListeners();
   }
@@ -61,13 +61,10 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
       );
 
   @override
-  Future<void> setNewRoutePath(MyRouteData route) async {
-    routeData = route;
-    return await _buildPages(route);
+  Future<void> setNewRoutePath(MyRouteData appRoute) async {
+    routeData = appRoute;
+    _pages = routesPagesMap[appRoute.path]!;
   }
-
-  Future<void> _buildPages(MyRouteData appRoute) async =>
-      _pages = routesPagesMap[appRoute.path]!;
 
   void _onpop() {
     var newPath = routePrevMap[routeData.path];
@@ -84,10 +81,10 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
         pathString += '/$ps';
 
     routeData = myRoutesParser(pathString);
-    _buildPages(routeData);
+    _pages = routesPagesMap[routeData.path]!;
   }
 
-  void _buildTrees() {
+  void _buildListPages() {
     final myRoutes = myRoutesMap.keys.toList();
 
     for (var route in myRoutes) {
