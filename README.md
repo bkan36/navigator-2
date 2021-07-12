@@ -28,6 +28,7 @@ how to use ?
     this will call the call method in my_router_delegate.dart, params is optional.
 
 5 - To retrieve your params:
+
     var approute = MyRouterDelegate().currentConfiguration;
     Book? book = getBookById(approute!.params['id']!);
 
