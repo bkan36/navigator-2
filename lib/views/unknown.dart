@@ -7,7 +7,7 @@ class UnknownScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Text('404!'),
+        child: Text('404!', style: TextStyle(color: Colors.white, fontSize: 40),),
       ),
     );
   }
