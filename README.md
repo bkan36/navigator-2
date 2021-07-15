@@ -37,9 +37,15 @@ how to use ?
 
 that's all.
 
+You can find a detailed explanation here:
+
+https://bkan3060.medium.com/how-handle-flutter-navigator-2-0-without-package-ea9e09ac9ead
+
 to remove the # from url:
-    - add this dependency in your pubspec.yaml file -> url_strategy: ^0.2.0
-    - before runApp(MyApp()) inside the main put setPathUrlStrategy(); and don't forget to import it
+
+   - add this dependency in your pubspec.yaml file -> url_strategy: ^0.2.0
+
+   - before runApp(MyApp()) inside the main put setPathUrlStrategy(); and don't forget to import it
 
 
 !!! WARNING !!!
@@ -47,3 +53,4 @@ to remove the # from url:
     If your app have 2 routes like bookDetailsPath and userRepo (my_routes_app.dart)
     be care of "book" keyword because if someone has book as name it will result in unintended behavior
     he will be redirect to /book/:id instead of /:user/:repo.
+
