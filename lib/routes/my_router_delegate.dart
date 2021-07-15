@@ -71,7 +71,6 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
 
     List<String> pathList = Uri.parse(newPath!).pathSegments;
 
-    var i = 0;
     var pathString = '';
 
     for (var ps in pathList)
