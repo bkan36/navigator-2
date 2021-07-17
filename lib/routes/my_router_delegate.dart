@@ -13,7 +13,7 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
   }
 
   final GlobalKey<NavigatorState> _navigatorKey;
-  late MyRouteData routeData;
+  MyRouteData routeData = MyRouteData(homePath);
 
   List<MaterialPage> _pages = [];
   Map<String, List<MaterialPage>> routesPagesMap = {};
