@@ -44,8 +44,10 @@ https://bkan3060.medium.com/how-handle-flutter-navigator-2-0-without-package-ea9
 to remove the # from url:
 
    - add this dependency in your pubspec.yaml file -> url_strategy: ^0.2.0
-
+   
    - before runApp(MyApp()) inside the main put setPathUrlStrategy(); and don't forget to import it
+
+   - import 'package:url_strategy/url_strategy.dart';
 
 
 !!! WARNING !!!
