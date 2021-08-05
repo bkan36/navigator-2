@@ -36,19 +36,7 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
   Widget build(BuildContext context) => Navigator(
         key: navigatorKey,
         pages: _pages.isEmpty
-            ? [
-                MaterialPage(
-                  child: Center(
-                    child: Text(
-                      'Loading...',
-                      style: TextStyle(
-                        fontSize: 100,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                )
-              ]
+            ? [MaterialPage(child: Container(color: Colors.blueGrey[900]))]
             : _pages,
         onPopPage: (route, result) {
           if (!route.didPop(result)) return false;
