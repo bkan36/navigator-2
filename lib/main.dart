@@ -4,7 +4,11 @@ import 'package:navigator_2/routes/my_router_delegate.dart';
 
 import 'package:url_strategy/url_strategy.dart';
 
+final myRouteDelegate = MyRouterDelegate();
+final myRouteInformationParser = MyRouteInformationParser();
+
 void main() {
+  
   setPathUrlStrategy();
   runApp(BooksApp());
 }
@@ -16,15 +20,15 @@ class BooksApp extends StatelessWidget {
       title: 'Books App',
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
-          primaryColor: Colors.green,
+          primaryColor: Colors.yellow,
           scaffoldBackgroundColor: Colors.blueGrey[900],
           textTheme: TextTheme(
             headline6: TextStyle(color: Colors.white),
             subtitle1: TextStyle(color: Colors.white),
             caption: TextStyle(color: Colors.white),
           )),
-      routerDelegate: MyRouterDelegate(),
-      routeInformationParser: MyRouteInformationParser(),
+      routerDelegate: myRouteDelegate,
+      routeInformationParser: myRouteInformationParser,
     );
   }
 }
