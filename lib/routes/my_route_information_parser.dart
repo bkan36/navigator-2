@@ -13,7 +13,7 @@ MyRouteData myRoutesParser(String pathFromUrl) {
 
     if (routeUriList.length == pathUriList.length) {
       var diff = 0;
-      Map<String, String> params = {};
+      Map<String, dynamic> params = {};
 
       for (var i = 0; i < routeUriList.length; i++)
         if (routeUriList[i][0] != PARAM_CHAR &&
@@ -37,7 +37,7 @@ String buildRouteLocation(MyRouteData route) {
 
   for (var ps in pathList)
     if (ps[0] == PARAM_CHAR)
-      location += '/${route.params[ps.replaceFirst(PARAM_CHAR, '')]!}';
+      location += '/${route.params[ps.replaceFirst(PARAM_CHAR, '')].toString()}';
     else
       location += '/$ps';
 
