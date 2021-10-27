@@ -8,7 +8,6 @@ final myRouteDelegate = MyRouterDelegate();
 final myRouteInformationParser = MyRouteInformationParser();
 
 void main() {
-  
   setPathUrlStrategy();
   runApp(BooksApp());
 }
@@ -20,7 +19,21 @@ class BooksApp extends StatelessWidget {
       title: 'Books App',
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
-          primaryColor: Colors.yellow,
+          colorScheme: ColorScheme(
+            primary: Colors.green,
+            primaryVariant: Colors.green[200]!,
+            secondary: Colors.amber[50]!,
+            secondaryVariant: Colors.amber[50]!,
+            surface: Colors.blueGrey,
+            background: Colors.blueGrey[900]!,
+            error: Colors.red,
+            onPrimary: Colors.green,
+            onSecondary: Colors.amber[50]!,
+            onSurface: Colors.blueGrey,
+            onBackground: Colors.blueGrey[900]!,
+            onError: Colors.redAccent,
+            brightness: Brightness.light,
+          ),
           scaffoldBackgroundColor: Colors.blueGrey[900],
           textTheme: TextTheme(
             headline6: TextStyle(color: Colors.white),
