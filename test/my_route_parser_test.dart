@@ -7,7 +7,7 @@ void runTest(String path, {String? toMatch}) {
 
   expect(result.path, toMatch ?? path);
 
-  if (toMatch != null && toMatch.endsWith(PARAM_CHAR))
+  if (toMatch != null && toMatch.endsWith(paramChar))
     expect(result.params, isNotEmpty);
 }
 
@@ -22,8 +22,5 @@ void main() {
 
     test('should return a path with 1 param',
         () => runTest('/book/20', toMatch: bookDetailsPath));
-
-    test('should return a dynamic nested path',
-        () => runTest('/dynamic/path/settings/branches', toMatch: userRepoSettingsBranches));
   });
 }

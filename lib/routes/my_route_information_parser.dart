@@ -16,11 +16,11 @@ MyRouteData myRoutesParser(String pathFromUrl) {
       Map<String, dynamic> params = {};
 
       for (var i = 0; i < routeUriList.length; i++)
-        if (routeUriList[i][0] != PARAM_CHAR &&
+        if (routeUriList[i][0] != paramChar &&
             routeUriList[i] != pathUriList[i])
           diff++;
-        else if (routeUriList[i][0] == PARAM_CHAR)
-          params[routeUriList[i].replaceFirst(PARAM_CHAR, '')] = pathUriList[i];
+        else if (routeUriList[i][0] == paramChar)
+          params[routeUriList[i].replaceFirst(paramChar, '')] = pathUriList[i];
 
       if (diff == 0) return MyRouteData(route, params: params);
     }
@@ -30,14 +30,14 @@ MyRouteData myRoutesParser(String pathFromUrl) {
 }
 
 String buildRouteLocation(MyRouteData route) {
-  if (!route.path.contains(PARAM_CHAR)) return route.path;
+  if (!route.path.contains(paramChar)) return route.path;
 
   var location = '';
   final pathList = Uri.parse(route.path).pathSegments;
 
   for (var ps in pathList)
-    if (ps[0] == PARAM_CHAR)
-      location += '/${route.params[ps.replaceFirst(PARAM_CHAR, '')].toString()}';
+    if (ps[0] == paramChar)
+      location += '/${route.params[ps.replaceFirst(paramChar, '')].toString()}';
     else
       location += '/$ps';
 
@@ -46,10 +46,11 @@ String buildRouteLocation(MyRouteData route) {
 
 class MyRouteInformationParser extends RouteInformationParser<MyRouteData> {
   @override
-  Future<MyRouteData> parseRouteInformation(RouteInformation routeInf) async =>
-      myRoutesParser(routeInf.location ?? '');
+  Future<MyRouteData> parseRouteInformation(
+          RouteInformation routeInformation) async =>
+      myRoutesParser(routeInformation.location ?? '');
 
   @override
-  RouteInformation? restoreRouteInformation(MyRouteData routePath) =>
-      RouteInformation(location: buildRouteLocation(routePath));
+  RouteInformation? restoreRouteInformation(MyRouteData configuration) =>
+      RouteInformation(location: buildRouteLocation(configuration));
 }

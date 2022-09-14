@@ -62,8 +62,8 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
     var pathString = '';
 
     for (var ps in pathList)
-      if (ps[0] == PARAM_CHAR)
-        pathString += '/${routeData.params[ps.replaceFirst(PARAM_CHAR, '')]!}';
+      if (ps[0] == paramChar)
+        pathString += '/${routeData.params[ps.replaceFirst(paramChar, '')]!}';
       else
         pathString += '/$ps';
 
@@ -82,7 +82,7 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
       var tmp = '';
 
       pagesList.add(MaterialPage(
-        key: ValueKey(homePath),
+        key: const ValueKey(homePath),
         child: myRoutesMap[homePath]!,
       ));
 
