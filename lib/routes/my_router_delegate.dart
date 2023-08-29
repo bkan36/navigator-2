@@ -4,6 +4,8 @@ import 'dart:async';
 import 'my_routes_app.dart';
 import 'my_route_data.dart';
 
+final routeController = MyRouterDelegate();
+
 class MyRouterDelegate extends RouterDelegate<MyRouteData>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<MyRouteData> {
   factory MyRouterDelegate() => _singlton;
@@ -67,7 +69,7 @@ class MyRouterDelegate extends RouterDelegate<MyRouteData>
       else
         pathString += '/$ps';
 
-    routeData = myRoutesParser(pathString);
+    routeData = myRoutesParser(Uri.parse(pathString));
     _pages = routesPagesMap[routeData.path]!;
   }
 

@@ -21,9 +21,7 @@ class BooksApp extends StatelessWidget {
       darkTheme: ThemeData(
           colorScheme: ColorScheme(
             primary: Colors.green,
-            primaryVariant: Colors.green[200]!,
             secondary: Colors.amber[50]!,
-            secondaryVariant: Colors.amber[50]!,
             surface: Colors.blueGrey,
             background: Colors.blueGrey[900]!,
             error: Colors.red,

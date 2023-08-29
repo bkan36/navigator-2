@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_2/data/book_list.dart';
-import 'package:navigator_2/routes/my_router_delegate.dart';
+import 'package:navigator_2/main.dart';
 
 import '../../entities/book_entity.dart';
 
@@ -9,7 +9,7 @@ class BookDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var approute = MyRouterDelegate().currentConfiguration;
+    var approute = myRouteDelegate.currentConfiguration;
     Book? book = getBookById(approute!.params['id']!);
 
     return Scaffold(

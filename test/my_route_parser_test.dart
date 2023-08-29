@@ -3,7 +3,7 @@ import 'package:navigator_2/routes/my_routes_app.dart';
 import 'package:navigator_2/routes/my_route_information_parser.dart';
 
 void runTest(String path, {String? toMatch}) {
-  final result = myRoutesParser(path);
+  final result = myRoutesParser(Uri.parse(path));
 
   expect(result.path, toMatch ?? path);
 

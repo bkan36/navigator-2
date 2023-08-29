@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'my_routes_app.dart';
 import 'my_route_data.dart';
 
-MyRouteData myRoutesParser(String pathFromUrl) {
-  final List<String> pathUriList = Uri.parse(pathFromUrl).pathSegments;
+final routeInformationParser = MyRouteInformationParser();
+
+MyRouteData myRoutesParser(Uri pathFromUrl) {
+  final List<String> pathUriList = pathFromUrl.pathSegments;
 
   if (pathUriList.isEmpty) return MyRouteData(homePath);
 
@@ -48,9 +50,9 @@ class MyRouteInformationParser extends RouteInformationParser<MyRouteData> {
   @override
   Future<MyRouteData> parseRouteInformation(
           RouteInformation routeInformation) async =>
-      myRoutesParser(routeInformation.location ?? '');
+      myRoutesParser(routeInformation.uri);
 
   @override
   RouteInformation? restoreRouteInformation(MyRouteData configuration) =>
-      RouteInformation(location: buildRouteLocation(configuration));
+      RouteInformation(uri: Uri.parse(buildRouteLocation(configuration)));
 }
