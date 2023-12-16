@@ -17,27 +17,6 @@ class BooksApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Books App',
-      themeMode: ThemeMode.dark,
-      darkTheme: ThemeData(
-          colorScheme: ColorScheme(
-            primary: Colors.green,
-            secondary: Colors.amber[50]!,
-            surface: Colors.blueGrey,
-            background: Colors.blueGrey[900]!,
-            error: Colors.red,
-            onPrimary: Colors.green,
-            onSecondary: Colors.amber[50]!,
-            onSurface: Colors.blueGrey,
-            onBackground: Colors.blueGrey[900]!,
-            onError: Colors.redAccent,
-            brightness: Brightness.light,
-          ),
-          scaffoldBackgroundColor: Colors.blueGrey[900],
-          textTheme: TextTheme(
-            headline6: TextStyle(color: Colors.white),
-            subtitle1: TextStyle(color: Colors.white),
-            caption: TextStyle(color: Colors.white),
-          )),
       routerDelegate: myRouteDelegate,
       routeInformationParser: myRouteInformationParser,
     );
