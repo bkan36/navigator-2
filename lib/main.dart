@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:navigator_2/routes/my_route_information_parser.dart';
-import 'package:navigator_2/routes/my_router_delegate.dart';
 
 import 'package:url_strategy/url_strategy.dart';
 
-final myRouteDelegate = MyRouterDelegate();
-final myRouteInformationParser = MyRouteInformationParser();
+import 'routes/my_route_information_parser.dart';
+import 'routes/my_router_delegate.dart';
 
 void main() {
   setPathUrlStrategy();
@@ -17,8 +15,8 @@ class BooksApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Books App',
-      routerDelegate: myRouteDelegate,
-      routeInformationParser: myRouteInformationParser,
+      routerDelegate: goRoute,
+      routeInformationParser: routeInformationParser,
     );
   }
 }

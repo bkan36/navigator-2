@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_2/data/book_list.dart';
-import 'package:navigator_2/main.dart';
+import 'package:navigator_2/routes/my_router_delegate.dart';
 
 import '../../entities/book_entity.dart';
 
@@ -9,7 +9,7 @@ class BookDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var approute = myRouteDelegate.currentConfiguration;
+    var approute = goRoute.currentConfiguration;
     Book? book = getBookById(approute!.params['id']!);
 
     return Scaffold(
@@ -20,9 +20,9 @@ class BookDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (book != null) ...[
-              Text(book.title, style: Theme.of(context).textTheme.headline6),
-              Text(book.id, style: Theme.of(context).textTheme.subtitle1),
-              Text(book.author, style: Theme.of(context).textTheme.subtitle1),
+              Text(book.title),
+              Text(book.id),
+              Text(book.author),
             ],
             if (book == null) Text('BOOK NOT FOUND'),
             SizedBox(height: 80.0),

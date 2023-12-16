@@ -4,7 +4,7 @@ import 'dart:async';
 import 'my_routes_app.dart';
 import 'my_route_data.dart';
 
-final routeController = MyRouterDelegate();
+final goRoute = MyRouterDelegate();
 
 class MyRouterDelegate extends RouterDelegate<MyRouteData>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<MyRouteData> {
