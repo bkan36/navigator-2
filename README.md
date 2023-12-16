@@ -6,30 +6,30 @@ how to use ?
 
 1 - copy routes folder in your project.
 
-2 - Pass MyRouterDelegate() and MyRouteInformationParser() to your MaterialApp.router in main.dart:
+2 - Pass goRoute from MyRouterDelegate file and routeInformationParser from  MyRouteInformationParser() file to your MaterialApp.router in main.dart:
 
     return MaterialApp.router(
       title: 'Books App',
       ...
       ...
-      routerDelegate: MyRouterDelegate(),
-      routeInformationParser: MyRouteInformationParser(),
+      routerDelegate: goRoute,
+      routeInformationParser: routeInformationParser,
     );
 
-3 - Fill your routes in my_route_app.dart and be care to keep homePath, pageNotFoundPath and the
-    PARAM_CHAR const, they are used in information_parser and router_delegate.
+3 - Fill your routes in my_route_app.dart and be care to keep "homePath", "pageNotFoundPath" and
+    "paramChar", they're used in information_parser and router_delegate.
     Each widget associated to a path don't have to take arguments in its constructor
     you'll retrieve them in a different way.
 
 4 - To reach a route you just have to use this syntax:
 
-    MyRouterDelegate()(MyRouteData(homePath, params: {'id': book.id}))
+    goRoute(MyRouteData(homePath, params: {'id': book.id}))
 
     this will call the call method in my_router_delegate.dart, params is optional.
 
 5 - To retrieve your params:
 
-    var approute = MyRouterDelegate().currentConfiguration;
+    var approute = goRoute.currentConfiguration;
     Book? book = getBookById(approute!.params['id']!);
 
     currentConfigaturation return MyRouteData that hold the current path and its params.
@@ -45,7 +45,7 @@ to remove the # from url:
 
    - add this dependency in your pubspec.yaml file -> url_strategy: ^0.2.0
    
-   - before runApp(MyApp()) inside the main put setPathUrlStrategy(); and don't forget to import it
+   - before runApp(MyApp()) inside the main add setPathUrlStrategy(); and don't forget to import it
 
    - import 'package:url_strategy/url_strategy.dart';
 
